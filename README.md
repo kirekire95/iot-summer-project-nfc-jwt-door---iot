@@ -2,7 +2,7 @@
 
 #### Erik Claesson - ec222qs
 
-In this project I am going to talk about how I built my own authentication system featuring a door that can be opened with NFC cards with the help of a JSON Web Token (JWT) stored onto it for extra security.
+In this project I am going to talk about how I built my own authentication system featuring a door that can be opened with an NFC card along with the help of a JSON Web Token (JWT) stored onto it for extra security.
 
 This project also briefly goes over my technologies of choice, such as Next.js, GraphQL, Prisma and Redis, etc and how I used these technologies together in a microservice architecture.
 
@@ -172,7 +172,7 @@ The unique ID of the NFC card is saved and connected to a user inside my Prisma 
 - [ ] \*Explain your choice of database.
 - [ ] \*Automation/triggers of the data.
 
-### Finalizing the design
+### Closing thoughts
 
 I achieved everything I could possibly want for this project, and I am very much content with the results.
 Further down the line I plan on adding on further datasources to my GraphQL gateway, where I can leverage the IoT related things for other projects as well. In that sense it feels great to have all the infrastructure already in place with a good architecture that allows you to easily add on more datasources to my GraphQL gateway and what not.
