@@ -18,15 +18,15 @@ Esimated price: 3000 SEK
 
 ### Objective
 
-My goal when taking this IoT course was to build a project that involved opening a door with a JWT along with an NFC card. The idea of combining software written on the computer with electronics in real life was amazing to me, and so it has been incredibly educational and fun to go all the way from start to finish with this project.
+My goal when taking this IoT course was to build a project that involved opening a door with a JWT along with an NFC card. The idea of combining software written on the computer with electronics in real life was incredible to me, and so it has been quite the journey all the way from start to finish with this project.
 
-In the end, the purpose and insights of this project has mainly been educational and for myself to see what code and electronics can achieve together when combined. There is however also a valid use case for this as I definitely can see the need for more smart authentication systems in general.
+In the end, the purpose and insights of this project has mainly been educational and for myself to see what code and electronics can achieve together when combined. There is however also a valid use case for this as I definitely can see the need for more smart authentication systems in the near future.
 
 ### Material
 
 The material used for this project includes:
 
-1. **Raspberry Pi 4** - In my project I decided to use a Raspberry Pi to spin up a Node.js server, and by leveraging a couple of NPM libraries I could then communicate with any lights, buzzers, the solenoid, the PN532, and so on.
+1. **Raspberry Pi 4** - In my project I decided to use a Raspberry Pi 4 to spin up a Node.js server, and by leveraging a couple of NPM libraries I could then communicate with any lights, buzzers, the solenoid, the PN532, and so on.
 2. **Breadboard** - I used the breadboard to wire up all the electronics.
 3. **Breadboarding Female/Female Jumper Wires**
 4. **Breadboarding Female/Male Jumper Wires**
