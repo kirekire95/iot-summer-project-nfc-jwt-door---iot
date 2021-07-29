@@ -18,7 +18,7 @@ Esimated price: 3000 SEK
 
 ### Objective
 
-My goal when taking this IoT course was to build a project that involved opening a door with a JWT along with an NFC card. The idea of combining software written on the computer with electronics in real life was incredible to me, and so it has been quite the journey all the way from start to finish with this project.
+My goal when taking this IoT course was to build a project that involved interacting with a door from a NFC card with a JWT written to it. The idea of combining software written on the computer with electronics in real life was incredible to me, and so it has been quite the journey all the way from start to finish with this project.
 
 In the end, the purpose and insights of this project has mainly been educational and for myself to see what code and electronics can achieve together when combined. There is however also a valid use case for this as I definitely can see the need for more smart authentication systems in the near future.
 
