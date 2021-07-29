@@ -89,7 +89,7 @@ The material came from these seven places:
 
   - Door knob
   - 2x Door hinge
-  - Prototype door - made with wood
+  - Prototype door
   - Glue
 
 - kjell.com
