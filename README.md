@@ -153,7 +153,7 @@ s.send(package)
 
 ### Transmitting data and connectivity
 
-I am using an ethernet connection for all of locally hosted services where data is sent fairly frequently.
+I am using an ethernet connection for all of my locally hosted services where data is sent fairly frequently.
 Communication happens via the HTTPS protocol as well as via webhooks and websockets through GraphQL subscriptions.
 Furthermore, GraphQL queries, mutations and subscriptions, as well as serverless functions are used - which utilizes API routes inside Next.js - to handle communication between my services.
 
