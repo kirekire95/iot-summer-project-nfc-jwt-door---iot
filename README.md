@@ -130,7 +130,7 @@ I would not consider myself to be an expert in terms of electronics as it is my 
 
 ### Platform
 
-In general, most of the things are running locally which I found gave a great developer experience as well as a greater control over how each service is running. I also however tried out hosting all of the services separately, and that works fine as well except for the websocket issue which lead me into hosting the Next.js application locally as a custom server for the time being.
+In general, most of the services are running locally off the cloud which I found provided a great developer experience as well as a greater control over how each service is running. I also however tried out hosting all of the services separately, and that works fine as well except for the websocket issue which lead me into hosting the Next.js application locally as a custom server for the time being.
 
 - **Postgres** - I use a hosted postgres solution from [Heroku](https://www.heroku.com) to manage my Prisma ORM, but it could just as well be hosted locally too for faster performance. It is just that if I were to deploy this on for example Vercel in the future, then it would be more convenient to have the Postgres database already hosted somewhere other than on your own computer for everything to go more smoothly.
 
@@ -141,7 +141,7 @@ In general, most of the things are running locally which I found gave a great de
 - **Raspberry Pi Node.js application** - The Raspberry Pi application that handles the electronics is portforwarded by my router so that it can be communicated with regardless of where the other services are hosted. This is the only application that I find a legitimate reason to only host locally due to the electronics involved etc.
 
 To summarize; some parts are hosted on the cloud, and others are hosted locally.
-However, any solution generally works and all of the services I use are using rather generous free tiers without any payments required. Should the application scale very well, then one would have to consider the cost of each service and act according to that.
+However, any solution generally works and all of the services I use have got rather generous free tiers without any payments required. Should the application scale very well, then one would have to consider the cost of each service and act according to that.
 
 ### The code
 
