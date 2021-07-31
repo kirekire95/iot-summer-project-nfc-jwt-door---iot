@@ -27,7 +27,7 @@ In the end, the purpose and insights of this project has mainly been educational
 The material used for this project includes:
 
 1. **Raspberry Pi 4** - In my project I decided to use a Raspberry Pi 4 to spin up a Node.js server, and by leveraging a couple of NPM libraries I could then communicate with any lights, buzzers, the solenoid, the PN532, and so on.
-2. **Breadboard** - I used the breadboard to wire up all the electronics.
+2. **Breadboard** - At least one breadboard should be required to wire up all the electronics. In my case I used three different breadboards for easier separation of concerns.
 3. **Breadboarding Female/Female Jumper Wires**
 4. **Breadboarding Female/Male Jumper Wires**
 5. **Breadboarding Male/Male Jumper Wires** - I used the jumper cables to connect the GPIO pins to the breadboard. I also used jumpers from the breadboard to the solenoid and to the DC-jack.
