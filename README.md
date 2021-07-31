@@ -29,9 +29,10 @@ The material used for this project includes:
 TODO: Finish this up
 | Material | Description | Cost (SEK) | Store |
 |----------|-------------|------------|-------|
-|          |             |            |       |
-|          |             |            |       |
-|          |             |            |       |
+| | | | |
+| | | | |
+| | | | |
+
 1. **Raspberry Pi 4** - In my project I decided to use a Raspberry Pi 4 to spin up a Node.js server, and by leveraging a couple of NPM libraries I could then communicate with any lights, buzzers, the solenoid, the PN532, and so on.
 2. **Breadboard** - At least one breadboard should be required to wire up all the electronics. In my case I used three different breadboards for better separation of concerns.
 3. **Breadboarding Female/Female Jumper Wires**
@@ -114,7 +115,6 @@ TODO: How did I setup Raspberry Pi with the PN532?
 
 I am using VS Code for my editor of choice, and when writing the code on my Raspberry Pi I found it useful to use RDP (Remote Desktop Protocol) or any kind of software that allows you to see the screen. Then in terms of uploading the code, I would setup SSH on the Raspberry Pi and upload the code to my Github for version management.
 
-
 - [ ] Steps that you needed to do for your computer. Installation of Node.js, extra drivers, etc.
 
 ### Putting everything together
@@ -145,18 +145,111 @@ However, any solution generally works and all of the services I use have got rat
 
 ### The code
 
-Import core functions of your code here, and don't forget to explain what you have done! Do not put too much code here, focus on the core functionalities. Have you done a specific function that does a calculation, or are you using clever function for sending data on two networks? Or, are you checking if the value is reasonable etc. Explain what you have done, including the setup of the network, wireless, libraries and all that is needed to understand.
+There is a whole bunch of code that makes up this project. But to keep it somewhat simple to understand what is going on, I will only be showing some key snippets from the application.
 
-```python=
-import this as that
+As for the code snippet below, I am awaiting the results from a getNFC function which I pass the unique ID of the NFC card to as an argument. This function will send off a GraphQL query to the Next.js application GraphQL Server, and then that will go through a so called resolver which queries the Prisma database for an NFC with the ID inside the argument, which is the ID of the NFC Card. If the ID is not there, then it returns null.
 
-def my_cool_function():
-    print('not much here')
+```js
+const getNFCResult = await getNFC(tag.uid);
 
-s.send(package)
-
-# Explain your code!
+if (!getNFCResult) {
+  return null;
+}
 ```
+
+If on the other hand the NFC ID exists inside the Prisma database, but there is no user, then that card does not belong to the rightful user, and it will then print a message saying that the door can only be unlocked by someone else.
+
+```js
+if (getNFCResult.id && !getNFCResult.user) {
+  turnOnThenOffDevice(redLED, 2000, () => {
+    isCardBusy(false);
+  });
+  return console.log(
+    chalk.hex("#AE3450")("The door can only be unlocked by someone else")
+  );
+}
+```
+
+However, if we do have a user, we will first of all clear any potential red LED, and then we will fire off the unlockDoor function. We will also print a message saying welcome, along with the user's email that opened the door.
+
+```js
+if (getNFCResult.user) {
+  // Code that runs when the door is opened
+  turnOffDevice(redLED);
+  unlockDoor(getNFCResult.user);
+  return console.log(
+    chalk.hex("#68AA55")(`Welcome ${getNFCResult.user.email}!`)
+  );
+}
+```
+
+The asynchronous unlockDoor function below is what does quite a bit of magic.
+First of all it will open up the solenoid for 5 seconds along with the green light, and then it will lock itself. The green LED will also shut off after 5 seconds. Inside the callback function however, it will fire off a publishDoorState function with the state being set to CLOSE along with the user information as arguments. This code will update the UI inside the client-side application to render the door closed, much like the state of the physical door.
+
+Inside the try block in the case that a user was passed in to the unlockDoor function, what will happen is that an initMessage function will be called, which simply prints the user to a 20x4 LCD screen. After that, a POST request will be fired off with the state being set to OPEN, along with the user information as arguments - to a Next.js serverless function.
+
+```js
+export async function unlockDoor(user) {
+  turnOnThenOffDevice(solenoidLock, 5000);
+  turnOnThenOffDevice(greenLED, 5000, async () => {
+    isCardBusy(false);
+    await publishDoorState("CLOSE", user);
+  });
+
+  try {
+    if (user) {
+      initMessage(user.username);
+      await publishDoorState("OPEN", user);
+    }
+
+    // Send message to Next.js Application to let it know that the door is open through a serverless function.
+  } catch (error) {
+    console.log(chalk.hex("#AE3450")("unlockDoor catch error", error));
+  }
+}
+```
+
+The Next.js serverless function will then run its logic containing a switch statement to see if any of the passed in door state matches.
+
+```js
+switch (doorState) {
+  case "OPEN":
+    message = "Door unlocked";
+    doorStatus = "DOOR_OPEN";
+
+    pubsub.publish("DOOR_OPENED", {
+      status: doorStatus,
+      message,
+      user: username,
+    });
+    break;
+  case "CLOSE":
+    message = "Door locked";
+    doorStatus = "DOOR_CLOSED";
+
+    pubsub.publish("DOOR_CLOSED", {
+      status: doorStatus,
+      message,
+      user: username,
+    });
+    break;
+  case "TOGGLE":
+    message = "Door temporarily unlocked";
+    doorStatus = "DOOR_TEMPORARILY_UNLOCKED";
+
+    pubsub.publish("DOOR_TEMPORARILY_UNLOCKED", {
+      status: doorStatus,
+      message,
+      user: username,
+    });
+    break;
+  default:
+    console.log("publishDoor default condition - invalid door state");
+}
+```
+
+If for example the door state OPEN is passed in, then the DOOR_OPENED event will be published. Once published, there is a subscriber on the other end at the client-side of the Next.js application which subscribes to this published event.
+What then happens is that the UI is rerendered based on the information inside the published event, causing the UI in the client-side application to reflect the state of the physical door, and by what user it was that interacted with the door.
 
 ### Transmitting data and connectivity
 
