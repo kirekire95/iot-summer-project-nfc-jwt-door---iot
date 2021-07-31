@@ -145,7 +145,7 @@ However, any solution generally works and all of the services I use have got rat
 
 ### The code
 
-There is a whole bunch of code that makes up this project. But to keep it somewhat simple to understand what is going on, I will only be showing some key snippets from the application.
+There is a whole bunch of code and dependencies that makes up this project. But to keep it somewhat simple to understand, I will only be showing and explaining some key snippets from the application.
 
 As for the code snippet below, I am awaiting the results from a getNFC function which I pass the unique ID of the NFC card to as an argument. This function will send off a GraphQL query to the Next.js application GraphQL Server, and then that will go through a so called resolver which queries the Prisma database for an NFC with the ID inside the argument, which is the ID of the NFC Card. If the ID is not there, then it returns null.
 
