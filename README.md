@@ -26,6 +26,12 @@ In the end, the purpose and insights of this project has mainly been educational
 
 The material used for this project includes:
 
+TODO: Finish this up
+| Material | Description | Cost (SEK) | Store |
+|----------|-------------|------------|-------|
+|          |             |            |       |
+|          |             |            |       |
+|          |             |            |       |
 1. **Raspberry Pi 4** - In my project I decided to use a Raspberry Pi to spin up a Node.js server, and by leveraging a couple of NPM libraries I could then communicate with any lights, buzzers, the solenoid, the PN532, and so on.
 2. **Breadboard** - I used the breadboard to wire up all the electronics.
 3. **Breadboarding Female/Female Jumper Wires**
@@ -106,10 +112,9 @@ All in all, this is quite a bit of material that I used to create this project a
 
 TODO: How did I setup Raspberry Pi with the PN532?
 
-How is the device programmed. Which IDE are you using. Describe all steps from flashing the firmware, installing plugins in your favorite editor. How flashing is done on MicroPython. The aim is that a beginner should be able to understand.
+I am using VS Code for my editor of choice, and when writing the code on my Raspberry Pi I found it useful to use RDP (Remote Desktop Protocol) or any kind of software that allows you to see the screen. Then in terms of uploading the code, I would setup SSH on the Raspberry Pi and upload the code to my Github for version management.
 
-- [ ] Chosen IDE
-- [ ] How the code is uploaded
+
 - [ ] Steps that you needed to do for your computer. Installation of Node.js, extra drivers, etc.
 
 ### Putting everything together
@@ -117,6 +122,8 @@ How is the device programmed. Which IDE are you using. Describe all steps from f
 How is all the electronics connected? Describe all the wiring, good if you can show a circuit diagram. Be specific on how to connect everything, and what to think of in terms of resistors, current and voltage.
 
 I would not consider myself to be an expert in terms of electronics as it is my first time having laid my hands on this, but I would like to believe that I followed best practices to ensure a more or less production ready setup more so than a development only setup..
+
+![Fritzing Overview](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627771854/Erik/IoT%20Summer%20Course/IoT_Project_bb_oxqmlj.png)
 
 - [ ] Circuit diagram (can be hand drawn)
 - [ ] \*Electrical calculations
