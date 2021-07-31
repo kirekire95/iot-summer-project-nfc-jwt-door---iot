@@ -2,25 +2,25 @@
 
 #### Erik Claesson - ec222qs
 
-In this project I am going to talk about how I built my own authentication system featuring a door that can be opened with NFC cards with the help of a JSON Web Token (JWT) stored onto it for extra security.
+In this project I am going to talk about how I built my own authentication system featuring a door that can be opened with an NFC card along with the help of a JSON Web Token (JWT) stored onto it for extra security.
 
 This project also briefly goes over my technologies of choice, such as Next.js, GraphQL, Prisma and Redis, etc and how I used these technologies together in a microservice architecture.
 
 I will provide a brief overview but without going into too much detail here about my choice of technologies and what they are:
 
-1. Next.js, the React Framework, is a solution to build hybrid applications built with static assets and serverless functions. It is essentially a fullstack framework that gives you a backend and a frontend to work with.
-2. GraphQL is a query language for your API, and a server-side runtime for executing queries using a type system that you can define for your data, and this is arguably a better approach compared to something more traditional like REST.
-3. Prisma is a Next-generation Node.js and TypeScript ORM which i use Postgres with. With Prisma, you define your models in the declarative Prisma schema which serves as the single source of truth for your database schema and the models in your programming language of choice.
-4. Redis is an in-memory data structure store which I use as a message broker through the publish-subscribe-pattern, as well as caching GraphQL queries with persistent queries, and storing JSON Web Tokens.
+1. **Next.js**, the React Framework, is a solution to build hybrid applications built with static assets and serverless functions. It is essentially a fullstack framework that gives you a backend and a frontend to work with.
+2. **GraphQL** is a query language for your API, and a server-side runtime for executing queries using a type system that you can define for your data, and this is arguably a better approach compared to something more traditional like REST.
+3. **Prisma** is a Next-generation Node.js and TypeScript ORM which I use Postgres with. With Prisma, you define your models in the declarative Prisma schema which serves as the single source of truth for your database schema and the models in your programming language of choice.
+4. **Redis** is an in-memory data structure store which I use as a message broker through the publish-subscribe-pattern, as well as caching GraphQL queries with persistent queries, and storing JSON Web Tokens.
 
 Estimated time: 60+ hours - depends greatly on knowledge and familiarity.
 Esimated price: 3000 SEK
 
 ### Objective
 
-My goal when taking this IoT course was to build a project that involved opening a door with a JWT along with an NFC card. The idea of combining software written on the computer with electronics in real life was amazing to me, and so it has been incredibly educational and fun to go all the way from start to finish with this project.
+My goal when taking this IoT course was to build a project that involved interacting with a door from a NFC card with a JWT written to it. The idea of combining software written on the computer with electronics in real life was incredible to me, and so it has been quite the journey all the way from start to finish with this project.
 
-In the end, the purpose and insights of this project has mainly been educational and for myself to see what code and electronics can achieve together when combined. There is however also a valid use case for this as I definitely can see the need for more smart authentication systems in general.
+In the end, the purpose and insights of this project has mainly been educational and for myself to see what code and electronics can achieve together when combined. There is however also a valid use case for this as I definitely can see the need for more smart authentication systems in the near future.
 
 ### Material
 
@@ -32,8 +32,8 @@ TODO: Finish this up
 |          |             |            |       |
 |          |             |            |       |
 |          |             |            |       |
-1. **Raspberry Pi 4** - In my project I decided to use a Raspberry Pi to spin up a Node.js server, and by leveraging a couple of NPM libraries I could then communicate with any lights, buzzers, the solenoid, the PN532, and so on.
-2. **Breadboard** - I used the breadboard to wire up all the electronics.
+1. **Raspberry Pi 4** - In my project I decided to use a Raspberry Pi 4 to spin up a Node.js server, and by leveraging a couple of NPM libraries I could then communicate with any lights, buzzers, the solenoid, the PN532, and so on.
+2. **Breadboard** - At least one breadboard should be required to wire up all the electronics. In my case I used three different breadboards for better separation of concerns.
 3. **Breadboarding Female/Female Jumper Wires**
 4. **Breadboarding Female/Male Jumper Wires**
 5. **Breadboarding Male/Male Jumper Wires** - I used the jumper cables to connect the GPIO pins to the breadboard. I also used jumpers from the breadboard to the solenoid and to the DC-jack.
@@ -95,7 +95,7 @@ The material came from these seven places:
 
   - Door knob
   - 2x Door hinge
-  - Prototype door - made with wood
+  - Prototype door
   - Glue
 
 - kjell.com
@@ -160,7 +160,7 @@ s.send(package)
 
 ### Transmitting data and connectivity
 
-I am using an ethernet connection for all of locally hosted services where data is sent fairly frequently.
+I am using an ethernet connection for all of my locally hosted services where data is sent fairly frequently.
 Communication happens via the HTTPS protocol as well as via webhooks and websockets through GraphQL subscriptions.
 Furthermore, GraphQL queries, mutations and subscriptions, as well as serverless functions are used - which utilizes API routes inside Next.js - to handle communication between my services.
 
@@ -179,7 +179,7 @@ The unique ID of the NFC card is saved and connected to a user inside my Prisma 
 - [ ] \*Explain your choice of database.
 - [ ] \*Automation/triggers of the data.
 
-### Finalizing the design
+### Closing thoughts
 
 I achieved everything I could possibly want for this project, and I am very much content with the results.
 Further down the line I plan on adding on further datasources to my GraphQL gateway, where I can leverage the IoT related things for other projects as well. In that sense it feels great to have all the infrastructure already in place with a good architecture that allows you to easily add on more datasources to my GraphQL gateway and what not.
