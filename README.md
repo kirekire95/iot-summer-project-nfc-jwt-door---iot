@@ -111,7 +111,7 @@ We also must configure some settings for our Raspberry Pi, and we can do that by
 ```
 sudo raspi-config
 ```
-While we are here, we can enable I2C which we will need for the LCD Screen.
+While we are here, we can toggle ```Enable I2C ``` which we will need for the LCD Screen.
 We can also toggle ```Enable Serial Port``` and ```Disable Serial Console``` to disable shell and kernel messages via UART. 
 Next step is to enable UART, and for that we have to open and write to a file. We can do that with the following command:
 ```
