@@ -58,11 +58,85 @@ All in all, this is quite a bit of material that I used to create this project a
 
 ### Computer setup
 
-TODO: How did I setup Raspberry Pi with the PN532?
+In order to make efficient use of the Raspberry Pi, I personally like to install RDP (Remote Desktop Protocol). This is because I like to only sit with one computer instead of going back and forth between the two.
 
-I am using VS Code for my editor of choice, and when writing the code on my Raspberry Pi I found it useful to use RDP (Remote Desktop Protocol) or any kind of software that allows you to see the screen. Then in terms of uploading the code, I would setup SSH on the Raspberry Pi and upload the code to my Github for version management.
+In order to make RDP work, we must first make sure that the Raspberry Pi is up to date.
+We can ensure this by running the following command - which will update our Raspberry Pi to the latest version:
+```
+sudo apt update && sudo apt upgrade
+```
+Once that is done, we can go ahead and install the xrdp package. 
+This package will allow remote desktop on the Raspberry Pi.
+```
+sudo apt install xrdp
+```
+Also, in case we need the IP address of the Raspberry Pi, we can use this handy command:
+```
+hostname -I
+```
+Next up, we can open Remote Desktop Connection on our other computer and we should be able to see a screen like this:
 
-- [ ] Steps that you needed to do for your computer. Installation of Node.js, extra drivers, etc.
+![Remote Desktop Image](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627846033/Erik/IoT%20Summer%20Course/Screenshot_847_z3ctdo.png
+)
+
+After this we will install Node.js on our Raspberry Pi, and we can do that by heading over to the Node.js website and grabbing the latest version for ARMv7. 
+We can use wget to download the file like this:
+```
+wget https://nodejs.org/dist/v14.17.4/node-v14.17.4-linux-armv7l.tar.xz
+```
+And to pack it up:
+```
+tar xf node-v14.17.4-linux-armv7l.tar.xz node-v14.17.4-linux-armv7l/
+```
+Then we head into the directory and copy all of the files inside /usr/local/ with the following command:
+```
+cp -R * /usr/local/
+```
+We can now check if everything went well by running the following checks:
+```
+node -v
+npm -v
+```
+
+Once we have got Node.js installed, we should be able to start up the app, but we need to take some additional steps to really get PN532 working. 
+It is advisable to also install some further packages from libnfc so that we can run some nfc commands to easier debug and so on.
+
+We can do that with the following command:
+```
+sudo apt install libnfc-bin libnfc-examples
+```
+Now we should be able to run commands such as nfc-poll and nfc-scan-device
+
+We also must configure some settings for our Raspberry Pi, and we can do that by running the following command:
+```
+sudo raspi-config
+```
+While we are here, we can enable I2C which we will need for the LCD Screen.
+We can also toggle ```Enable Serial Port``` and ```Disable Serial Console``` to disable shell and kernel messages via UART. 
+Next step is to enable UART, and for that we have to open and write to a file. We can do that with the following command:
+```
+sudo nano /boot/config.txt
+```
+
+We can then enable UART by adding the following line (if it is not already present):
+```
+enable_uart=1
+```
+After that, we will go ahead and edit the nfc libnfc configuration file:
+```
+sudo nano /etc/nfc/libnfc.conf
+```
+We will add the following line:
+```
+device.connstring = "pn532_uart:/dev/ttyUSB0"
+```
+Once done, we should be able to run the following command and see that the NFC device has been found:
+```
+nfc-scan-device -v
+```
+![nfc-scan-device](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627850234/Erik/IoT%20Summer%20Course/Screenshot_851_upqs3k.png)
+
+At this point, we should be able to read and write with the PN532 NFC device as well as being able to use the LCD screen with I2C!
 
 ### Putting everything together
 
