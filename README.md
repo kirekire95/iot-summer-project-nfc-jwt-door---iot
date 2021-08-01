@@ -142,7 +142,7 @@ At this point, we should be able to read and write with the PN532 NFC device as 
 
 It is my first time having laid my hands on electronics, but I would like to believe that I followed best practices to ensure a more or less production ready setup more so than a development only setup.
 
-![Fritzing Overview](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627771854/Erik/IoT%20Summer%20Course/IoT_Project_bb_oxqmlj.png)
+![Fritzing Overview](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627859558/Erik/IoT%20Summer%20Course/IoT_Project_bb_ue7doj.png)
 
 ### Platform
 
