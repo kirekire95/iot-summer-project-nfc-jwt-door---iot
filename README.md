@@ -2,7 +2,9 @@
 
 #### Erik Claesson - ec222qs
 
-In this project I am going to talk about how I built my own authentication system featuring a door that can be opened with an NFC card along with the help of a JSON Web Token (JWT) stored onto it for extra security.
+### Overview
+
+In this project I will go through how I built my own authentication system featuring a door that can be opened with an NFC card along with the help of a JSON Web Token (JWT) stored onto it for extra security.
 
 This project also briefly goes over my technologies of choice, such as Next.js, GraphQL, Prisma and Redis, etc and how I used these technologies together in a microservice architecture.
 
@@ -26,88 +28,33 @@ In the end, the purpose and insights of this project has mainly been educational
 
 The material used for this project includes:
 
-TODO: Finish this up
-| Material | Description | Cost (SEK) | Store |
-|----------|-------------|------------|-------|
-| | | | |
-| | | | |
-| | | | |
+| Material                                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Cost (SEK) | Store             |
+|------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|-------------------|
+| Raspberry Pi 4 4GB                       | In my project I decided to use a Raspberry Pi 4 to spin up a Node.js server. By leveraging a couple of NPM libraries I could then communicate with any lights, buzzers, the solenoid, the PN532, and so on.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | 690        | shop.pimoroni.com |
+| 3x Breadboard                            | At least one breadboard should be required to wire up all the electronics.  In my case I used three different breadboards for better separation of concerns.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | 150        | elfa.se           |
+| Breadboarding Female/Female Jumper Wires |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | 60         | m.nu              |
+| Breadboarding Female/Male Jumper Wires   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | 60         | m.nu              |
+| Breadboarding Male/Male Jumper Wires     | I used the jumper cables to connect the GPIO pins to the breadboard.  I also used jumpers from the breadboard to the solenoid and to the DC-jack                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | 60         | m.nu              |
+| TIP120 NPN Power Darlington Transistor   | The transistor is used to drive various devices that have high power requirements, such as the 12V solenoid.  This is necessary since I do not want to directly interact with the solenoid through my Raspberry Pi.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 29         | m.nu              |
+| Adapter DC-jack                          | The DC-jack is used to power up the 12V solenoid with the help of a 12V DC Power Adapter.  One could also use batteries or a powerbank for this which would provide better mobility if needed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | 20         | electrokit.com    |
+| 1N4007 DO-41 1000V 1A diode              | The diode is used to allow flow of current only in one direction.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | 2.40       | electrokit.com    |
+| Buzzer                                   | The buzzer creates a beeping noise. I use this for the cases when the JWT has been written to the NFC card, or when the door has been interacted with.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | 29         | electrokit.com    |
+| Solenoid 12V                             | The solenoid is essentially an electronic lock which in my case is used as the lock mechanism for the door.  When 9-12VDC is applied, the slug pulls in so it doesn't stick out anymore and the door can then be opened.  Draws 650mA at 12V, 500 mA at 9V when activated.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | 199        | electrokit.com    |
+| 12V DC Power Adapter                     | I had a generic 12V DC Power Adapter laying around, and so I used this to power the DC-jack which in turn would give power to the solenoid.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | 0          | My Residence      |
+| FTDI-cable USB/TTL                       | The FTDI-cable is used to convert TTL serial transmissions to and from USB signals which in my case results in data being sent to the Raspberry Pi from the PN532 device.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | 279        | electrokit.com    |
+| PN532 NFC/RFID                           | The PN532 is a popular device which allows reading and writing to for example an NFC card which in turn will interact with the door.  The device can be used via I2C, UART or SPI communication protocols.  In my case I used the UART protocol for simplicity.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | 376        | elfa.se           |
+| 4x NTAG203 13.56 MHz RFID/NFC-cards      | These NFC cards are often used as train or bus passes.  The tag contains a small RFID chip and an antenna, and is passively powered by the reader/writer when placed a couple inches away. A couple of things to note here is that these chips can be written to and store only up to 144 bytes of data in writable EEPROM divided into 4 byte banks divided in 36 pages.  This is not enough for a large sized JWT, but it is enough for many use cases nevertheless.  Another thing to note is that unlike "Classic 1K" cards, these tags are more secure and work with almost any phone with RFID support. This is because they avoid the patent issues with Mifare, which requires an NXP chipset or license fee.  These cards are further used to write a minimal JWT to it which then can be used to open the door. | 112.40     | elfa.se           |
+| 20 x 4 positive LCD with RGB             | The screen is an optional fun device which in my case is used to print the door state and which user it is that interacted with the door.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | 238        | elfa.se           |
+| I2C-interface for LCD                    | The I2C interface is used to simplify communication when using the LCD screen, as you otherwise would have to connect a bunch of jumper cables individually onto the LCD screen pins.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 39         | electrokit.com    |
+| A pack of resistors                      | The resistor values will vary depending on what we want to achieve, and it can be calculated according to Ohm's law.  I used 220 Ω resistors for the lights, and a 2K Ω resistor for my TIP120 transistor.  Generally resistors are useful as a safety measure when connecting the electronics with the breadboard.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 90         | shop.pimoroni.com |
+| A pack of LED                            | A pack of LED lights comes in handy when debugging, but in my case I also use them to reflect various states in my application.  For example, I might use a red light to indicate an error state inside the application.  I might use an orange blinking light to indicate that the PN532 is currently reading the NFC card.  I might have a solid orange light on to indicate that the NFC card should be written to. I might use a blue LED to indicate that the JWT was written to the NFC card successfully, and I might use a green LED to indicate that the door has been opened, and so on.                                                                                                                                                                                                                        | 80         | shop.pimoroni.com |
+| Door knob                                | A door knob comes in handy to provide a good grip in terms of opening and closing the door if necessary.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | 30         | hornbach.se       |
+| 2x Door hinge                            | Door hinges are necessary to mount the door in place.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 50         | hornbach.se       |
+| Prototype door                           | The door itself can be made of wood, plywood or a more simple hobby material.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | 120        | hornbach.se       |
+| Glue                                     | Glue is recommended to connect the wooden parts of the door together.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 0          | My Residence      |
+| Soldering Iron                           | A soldering iron is required as it is necessary to solder the FTDI cable with the PN532, and it was also needed to solder the version of the 20 x 4 LCD screen that I got.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | 99         | kjell.com         |
 
-1. **Raspberry Pi 4** - In my project I decided to use a Raspberry Pi 4 to spin up a Node.js server, and by leveraging a couple of NPM libraries I could then communicate with any lights, buzzers, the solenoid, the PN532, and so on.
-2. **Breadboard** - At least one breadboard should be required to wire up all the electronics. In my case I used three different breadboards for better separation of concerns.
-3. **Breadboarding Female/Female Jumper Wires**
-4. **Breadboarding Female/Male Jumper Wires**
-5. **Breadboarding Male/Male Jumper Wires** - I used the jumper cables to connect the GPIO pins to the breadboard. I also used jumpers from the breadboard to the solenoid and to the DC-jack.
-6. **TIP120 NPN Power Darlington Transistor** - The transistor is used to drive various devices that have high power requirements, such as the 12V solenoid. This is necessary since I do not want to directly interact with the solenoid through my Raspberry Pi.
-7. **Adapter DC-jack** - The DC-jack is used to power up the 12V solenoid with the help of a 12V DC Power Adapter.
-   One could also use batteries or a powerbank for this which would provide better mobility if needed.
-8. **1N4007 DO-41 1000V 1A diode** - The diode is used to allow flow of current only in one direction which is all I needed.
-   at makes a beeping noise. I use this for the cases when the JWT has been written to the NFC card, or when the door has been interacted with.
-9. **Solenoid 12V** - The solenoid is essentially an electronic lock which in my case is used as the lock mechanism for the door. When 9-12VDC is applied, the slug pulls in so it doesn't stick out anymore and the door can then be opened. Draws 650mA at 12V, 500 mA at 9V when activated.
-10. **12V DC Power Adapter** - I had a generic 12V DC Power Adapter laying around, and so I used this to power the DC-jack which in turn would give power to the solenoid.
-11. **FTDI-cable USB/TTL** - The FTDI-cable is used to convert TTL serial transmissions to and from USB signals which in my case results in data being sent to the Raspberry Pi from the PN532 device.
-12. **PN532 NFC/RFID** - The PN532 is a popular device which allows reading and writing to for example an NFC card which in turn will interact with the door. The device can be used via I2C, UART or SPI communication protocols. In my case I used the UART protocol for simplicity.
-13. **NTAG203 13.56 MHz RFID/NFC-cards** - These NFC cards are often used as train or bus passes. The tag contains a small RFID chip and an antenna, and is passively powered by the reader/writer when placed a couple inches away.
-    A couple of things to note here is that these chips can be written to and store only up to **144 bytes** of data in writable EEPROM divided into 4 byte banks divided in 36 pages. This is not enough for a large size JWT, but it is enough for many use cases nevertheless. Another thing to note is that unlike "Classic 1K" cards, these tags are more secure and work with almost any phone with RFID support since they avoid the patent issues with Mifare, which requires an NXP chipset or license fee. These cards are further used to write a minimal JWT to it which then can be used to open the door.
-14. **20 x 4 positive LCD with RGB** - The screen is an optional fun device which in my case is used to print the door state and which user it is that interacted with the door.
-15. **I2C-interface for LCD** - The I2C interface is used to simplify communication when using the LCD screen, as you otherwise would have to connect a bunch of jumper cables individually onto the LCD screen pins.
-16. **A pack of resistors** - The resistor values will vary depending on what we want to achieve, and it can be calculated according to Ohm's law. I used 330 Ω resistors for the lights, and a 2K Ω resistor for my TIP120 transistor. Generally resistors are useful as a safety measure when connecting the electronics with the breadboard.
-17. **A pack of LEDs** - A pack of LED lights comes in handy when debugging, but in my case I also use them to reflect various states in my application. For example I might use a red light to indicate an error state inside the application. For example I might use an orange blinking light to indicate that the PN532 is currently reading the NFC card. I might have a solid orange light on to indicate that the NFC card should be written to, I might use a blue LED to indicate that the JWT was written to the NFC card successfully, and I might use a green LED to indicate that the door has been opened, and so on.
-18. **Door knob** - A door knob comes in handy to provide a good grip in terms of opening/closing the door if necessary.
-19. **2x Door hinge** - Door hinges are necessary to mount the door in place.
-20. **Prototype door** - The door itself can be made of wood, plywood or a more simple hobby material.
-21. **Glue** - Glue is recommended to connect the wooden parts of the door together.
-22. **Soldering Iron** - A soldering iron is required as it is necessary to solder the FTDI cable with the PN532, and it was also needed to solder the version of the 20 x 4 LCD screen that I got.
-
-Since I am located in Sweden, I could not order directly from Adafruit for instance since that would be very expensive and time consuming, and so I had to resort to various retailers nearby to find the parts I was looking for.
-
-The material came from these seven places:
-
-- elfa.se
-
-  - PN532 NFC/RFID
-  - NTAG203 13.56 MHz RFID/NFC-cards
-  - 20 x 4 positive LCD with RGB
-  - Breadboard
-
-- electrokit.com
-
-  - Buzzer
-  - Solenoid 12V
-  - FTDI-cable USB/TTL
-  - Adapter DC-jack
-  - 1N4007 DO-41 1000V 1A diode
-  - I2C-interface for LCD
-
-- m.nu
-
-  - Breadboarding Female/Female Jumper Wires
-  - Breadboarding Female/Male Jumper Wires
-  - Breadboarding Male/Male Jumper Wires
-  - TIP120 NPN Power Darlington Transistor
-
-- shop.pimoroni.com
-
-  - Raspberry Pi 4
-  - A pack of resistors
-  - A pack of LEDs
-
-- hornbach.se
-
-  - Door knob
-  - 2x Door hinge
-  - Prototype door
-  - Glue
-
-- kjell.com
-
-  - Soldering Iron
-
-- My home
-
-  - 12V DC Power Adapter
-
-All in all, this is quite a bit of material that I used to create this project and which costed about approximately 3000 SEK, but it's not set in stone and you might find yourself using other material to achieve more or less the same result at a cheaper price.
+All in all, this is quite a bit of material that I used to create this project and which costed around approximately 3000 SEK, but the parts to make this project come true is not set in stone and you might find yourself using other material to achieve more or less the same outcome at a cheaper price.
 
 ### Computer setup
 
@@ -119,14 +66,9 @@ I am using VS Code for my editor of choice, and when writing the code on my Rasp
 
 ### Putting everything together
 
-How is all the electronics connected? Describe all the wiring, good if you can show a circuit diagram. Be specific on how to connect everything, and what to think of in terms of resistors, current and voltage.
-
-I would not consider myself to be an expert in terms of electronics as it is my first time having laid my hands on this, but I would like to believe that I followed best practices to ensure a more or less production ready setup more so than a development only setup..
+It is my first time having laid my hands on electronics, but I would like to believe that I followed best practices to ensure a more or less production ready setup more so than a development only setup.
 
 ![Fritzing Overview](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627771854/Erik/IoT%20Summer%20Course/IoT_Project_bb_oxqmlj.png)
-
-- [ ] Circuit diagram (can be hand drawn)
-- [ ] \*Electrical calculations
 
 ### Platform
 
@@ -143,9 +85,21 @@ In general, most of the services are running locally off the cloud which I found
 To summarize; some parts are hosted on the cloud, and others are hosted locally.
 However, any solution generally works and all of the services I use have got rather generous free tiers without any payments required. Should the application scale very well, then one would have to consider the cost of each service and act according to that.
 
+### IoT specific libraries
+
+We can make use of libraries so that we can communicate with certain hardware and sensors through a programming language like JavaScript as in my case. The following libraries were used specific to IoT:
+
+| Library                    | Description                                                                                                                                           | Link                                                     |
+|----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|
+| raspberrypi-liquid-crystal | Library to communicate with the LCD screen                                                                                                            | https://www.npmjs.com/package/raspberrypi-liquid-crystal |
+| onoff                      | Library compatible with the GPIO pins of the Raspberry Pi. Allows us to power on and off anything we can think of such as lights, solenoids, etc.     | https://www.npmjs.com/package/onoff                      |
+| pn532                      | Library to communicate with the pn532 device                                                                                                          | https://www.npmjs.com/package/pn532                      |
+| serialport                 | Library to access serial ports with JavaScript                                                                                                        | https://www.npmjs.com/package/serialport                 |
+| ndef                       | Library to create and parse NDEF messages. NDEF is a data exchange format which can be used to exchange information between any compatible NFC device | https://www.npmjs.com/package/ndef                       |
+
 ### The code
 
-There is a whole bunch of code and dependencies that makes up this project. But to keep it somewhat simple to understand, I will only be showing and explaining some key snippets from the application.
+Many dependencies make up this project. But to keep it somewhat simple to understand, I will only be showing and explaining some key snippets from the application.
 
 As for the code snippet below, I am awaiting the results from a getNFC function which I pass the unique ID of the NFC card to as an argument. This function will send off a GraphQL query to the Next.js application GraphQL Server, and then that will go through a so called resolver which queries the Prisma database for an NFC with the ID inside the argument, which is the ID of the NFC card. If the ID is not there, then it returns null.
 
@@ -272,12 +226,7 @@ The unique ID of the NFC card is saved and connected to a user inside my Prisma 
 
 GraphQL queries, mutations and subscriptions are cached with a SHA-256 hash and are stored inside Redis with something known as persisted queries. Persistent queries are not truly related to the IoT side of things, but it does help with performance and improve network performance, particularly when it comes to larger query strings. Clients can then send the identifier instead of the corresponding query string, thus reducing request sizes dramatically.
 
-- [ ] Provide visual examples on how the dashboard looks. Pictures needed.
-- [ ] How often is data saved in the database.
-- [ ] \*Explain your choice of database.
-- [ ] \*Automation/triggers of the data.
-
-### Closing thoughts
+### Conclusion
 
 I achieved everything I could possibly want for this project, and I am very much content with the results.
 Further down the line I plan on adding on further datasources to my GraphQL gateway, where I can leverage the IoT related things for other projects as well. In that sense it feels great to have all the infrastructure already in place with a good architecture that allows you to easily add on more datasources to my GraphQL gateway and what not.
