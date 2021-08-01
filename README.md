@@ -11,7 +11,7 @@ I will provide a brief overview but without going into too much detail here abou
 1. **Next.js**, the React Framework, is a solution to build hybrid applications built with static assets and serverless functions. It is essentially a fullstack framework that gives you a backend and a frontend to work with.
 2. **GraphQL** is a query language for your API, and a server-side runtime for executing queries using a type system that you can define for your data, and this is arguably a better approach compared to something more traditional like REST.
 3. **Prisma** is a Next-generation Node.js and TypeScript ORM which I use Postgres with. With Prisma, you define your models in the declarative Prisma schema which serves as the single source of truth for your database schema and the models in your programming language of choice.
-4. **Redis** is an in-memory data structure store which I use as a message broker through the publish-subscribe-pattern, as well as caching GraphQL queries with persistent queries, and storing JSON Web Tokens.
+4. **Redis** is an in-memory data structure store which I use as a message broker through the publish-subscribe-pattern, as well as caching GraphQL queries with persisted queries, and storing JSON Web Tokens.
 
 Estimated time: 60+ hours - depends greatly on knowledge and familiarity.
 Esimated price: 3000 SEK
@@ -270,7 +270,7 @@ I try to minimize database calls wherever I can and instead utilize Redis whenev
 
 The unique ID of the NFC card is saved and connected to a user inside my Prisma ORM that uses Postgres under the hood upon every write. However, the JWT that has been written to the NFC card is stored inside Redis only for 5 minutes before expiring, and then one would have to issue and write another JWT onto the NFC card to be able to interact with the door once again.
 
-GraphQL queries, mutations and subscriptions are cached with a SHA-256 hash and are stored inside Redis with something known as persisted queries. Persistent queries are not truly related to the IoT side of things, but it does help with performance and improve network performance, particularly when it comes to larger query strings. Clients can then send the identifier instead of the corresponding query string, thus reducing request sizes dramatically.
+GraphQL queries, mutations and subscriptions are cached with a SHA-256 hash and are stored inside Redis with something known as persisted queries. Persisted queries are not truly related to the IoT side of things, but it does help with performance and improve network performance, particularly when it comes to larger query strings. Clients can then send the identifier instead of the corresponding query string, thus reducing request sizes dramatically.
 
 - [ ] Provide visual examples on how the dashboard looks. Pictures needed.
 - [ ] How often is data saved in the database.
