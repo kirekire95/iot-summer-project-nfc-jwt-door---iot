@@ -14,11 +14,11 @@ I will provide a brief overview but without going into too much detail here abou
 4. **Redis** is an in-memory data structure store which I use as a message broker through the publish-subscribe-pattern, as well as caching GraphQL queries with persisted queries, and storing JSON Web Tokens.
 
 Estimated time: 60+ hours - depends greatly on knowledge and familiarity.
-Esimated price: 3000 SEK
+Estimated price: 3000 SEK
 
 ### Objective
 
-My goal when taking this IoT course was to build a project that involved interacting with a door from a NFC card with a JWT written to it. The idea of combining software written on the computer with electronics in real life was incredible to me, and so it has been quite the journey all the way from start to finish with this project.
+My goal when building this project was to do something that involved interacting with a door from a NFC card, and even better if JSON Web Tokens could be involved with this I figured. The idea of combining software written on the computer with electronics in real life was incredible to me, and so it has been quite the journey all the way from start to finish with this project.
 
 In the end, the purpose and insights of this project has mainly been educational and for myself to see what code and electronics can achieve together when combined. There is however also a valid use case for this as I definitely can see the need for more smart authentication systems in the near future.
 
