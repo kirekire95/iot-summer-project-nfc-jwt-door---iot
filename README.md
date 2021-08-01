@@ -147,7 +147,7 @@ However, any solution generally works and all of the services I use have got rat
 
 There is a whole bunch of code and dependencies that makes up this project. But to keep it somewhat simple to understand, I will only be showing and explaining some key snippets from the application.
 
-As for the code snippet below, I am awaiting the results from a getNFC function which I pass the unique ID of the NFC card to as an argument. This function will send off a GraphQL query to the Next.js application GraphQL Server, and then that will go through a so called resolver which queries the Prisma database for an NFC with the ID inside the argument, which is the ID of the NFC Card. If the ID is not there, then it returns null.
+As for the code snippet below, I am awaiting the results from a getNFC function which I pass the unique ID of the NFC card to as an argument. This function will send off a GraphQL query to the Next.js application GraphQL Server, and then that will go through a so called resolver which queries the Prisma database for an NFC with the ID inside the argument, which is the ID of the NFC card. If the ID is not there, then it returns null.
 
 ```js
 const getNFCResult = await getNFC(tag.uid);
@@ -265,7 +265,12 @@ I did look into other protocols as well where one intriguing one was MQTT. I cou
 
 ### Presenting the data
 
-The unique ID of the NFC card is saved and connected to a user inside my Prisma ORM that uses Postgres under the hood. However, the JWT that has been written to the NFC card is stored inside Redis only for two minutes before expiring.
+Both the Raspberry Pi Node.js server and the Next.js application communicate to each other with every write and read to the NFC card to ensure that the JWT is still saved inside Redis for instance.
+I try to minimize database calls wherever I can and instead utilize Redis whenever possible as Redis as an in-memory data store tends to be quite a bit faster in terms of performance compared to interacting with a regular database.
+
+The unique ID of the NFC card is saved and connected to a user inside my Prisma ORM that uses Postgres under the hood upon every write. However, the JWT that has been written to the NFC card is stored inside Redis only for 5 minutes before expiring, and then one would have to issue and write another JWT onto the NFC card to be able to interact with the door once again.
+
+GraphQL queries, mutations and subscriptions are cached with a SHA-256 hash and are stored inside Redis with something known as persisted queries. Persistent queries are not truly related to the IoT side of things, but it does help with performance and improve network performance, particularly when it comes to larger query strings. Clients can then send the identifier instead of the corresponding query string, thus reducing request sizes dramatically.
 
 - [ ] Provide visual examples on how the dashboard looks. Pictures needed.
 - [ ] How often is data saved in the database.
