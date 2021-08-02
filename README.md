@@ -303,14 +303,36 @@ GraphQL queries, mutations and subscriptions are cached with a SHA-256 hash and 
 ### Conclusion
 
 I achieved everything I could possibly want for this project, and I am very much content with the results.
-Further down the line I plan on adding on further datasources to my GraphQL gateway, where I can leverage the IoT related things for other projects as well. In that sense it feels great to have all the infrastructure already in place with a good architecture that allows you to easily add on more datasources to my GraphQL gateway and what not.
+Further down the line I plan on adding on further datasources to my GraphQL gateway, where I can leverage the IoT related hardware for other projects as well. In that sense it feels great to have all the infrastructure already in place with a solid architecture that allows you to easily add on more datasources to the GraphQL gateway and what not.
 
-Lastly I would like to conclude that a single Node.js API for the Raspberry Pi is more than likely all you would need to get going with this type of project.
+Below are some pictures of the project in action!
+
+![door](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627921245/Erik/IoT%20Summer%20Course/IMG_20210802_181759_zgaxql.jpg)
+
+![behind-door](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627921282/Erik/IoT%20Summer%20Course/IMG_20210802_014543_y9wr9q.jpg)
+
+![behind-the-scenes](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627921299/Erik/IoT%20Summer%20Course/IMG_20210802_014520_cyd0td.jpg)
+
+![door-open](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627922467/Erik/IoT%20Summer%20Course/Screenshot_852_awznm8.png)
+
+![door-closed](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627922467/Erik/IoT%20Summer%20Course/Screenshot_853_sl1fap.png)
+
+![card-written](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627922949/Erik/IoT%20Summer%20Course/IMG_20210802_182556_atodry.jpg)
+
+![redis-nfc-token](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627923035/Erik/IoT%20Summer%20Course/Screenshot_854_ihbe1n.png)
+
+![login](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627923238/Erik/IoT%20Summer%20Course/Screenshot_857_ramfna.png)
+
+![issue-card](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627923238/Erik/IoT%20Summer%20Course/Screenshot_858_rbcjjn.png)
+
+![admin-interact-with-door](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627923238/Erik/IoT%20Summer%20Course/Screenshot_859_ielokg.png)
+
+![persisted-query](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627923296/Erik/IoT%20Summer%20Course/Screenshot_856_sco9dd.png)
+
+![discord-alert](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627922557/Erik/IoT%20Summer%20Course/Screenshot_855_vf7bx9.png)
+
+Lastly I would like to just mention that a single Node.js API for the Raspberry Pi is more than likely all you would need to get going with this type of project.
 In fact, initially I let the Raspberry Pi Node.js API handle everything from the IoT side of things to authentication and to creating users with a MongoDB database. Later on however, I thought it would be a better idea to turn this into a microservice architecture to adhere to greater separation of concerns and for greater scalability in the future.
 By going this route, the Raspberry Pi Node.js API would then only handle things related to the IoT and electronic side of things, such as reading and writing to the NFC card, turning on and off lights, and unlocking the door. In other words, it would no longer have to deal with things such as authentication or having its own database and so on. Instead, this is why I decided to create a separate Next.js application that also uses GraphQL which then adds on the RESTful Raspberry Pi API as a datasource on top of the GraphQL layer, so that this application can deal with authentication and distributing JSON Web Keys for other microservices to consume and what not.
 
-TODO: Insert pictures
-
-- [ ] Show final results of the project
-- [ ] Pictures
-- [ ] \*Video presentation
+PS. Video coming!
