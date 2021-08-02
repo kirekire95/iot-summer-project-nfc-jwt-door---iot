@@ -149,7 +149,7 @@ One example is my LCD screen which was a newer version that had some extra featu
 
 #### Fritzing Schematic
 
-![Fritzing Overview](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627859558/Erik/IoT%20Summer%20Course/IoT_Project_bb_ue7doj.png)
+![Fritzing Overview](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627934256/Erik/IoT%20Summer%20Course/IoT_Project_bb_h5ibgz.png)
 
 ### Platform
 
