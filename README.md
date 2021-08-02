@@ -327,7 +327,7 @@ Below are some pictures of the project in action!
 
 ![door](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627921245/Erik/IoT%20Summer%20Course/IMG_20210802_181759_zgaxql.jpg)
 
-![behind-door](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627921282/Erik/IoT%20Summer%20Course/IMG_20210802_014543_y9wr9q.jpg)
+![behind-door](https://res.cloudinary.com/cubbans-cloud/image/upload/q_60/v1627921282/Erik/IoT%20Summer%20Course/IMG_20210802_014543_y9wr9q.jpg)
 
 ![behind-the-scenes](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627921299/Erik/IoT%20Summer%20Course/IMG_20210802_014520_cyd0td.jpg)
 
