@@ -20,7 +20,9 @@ I will provide a brief overview but without going into too much detail here abou
 
 ### Objective
 
-My goal when building this project was to do something that involved interacting with a door from a NFC card, and even better if JSON Web Tokens could be involved with this I figured. The idea of combining software written on the computer with electronics in real life was incredible to me, and so it has been quite the journey all the way from start to finish with this project.
+My goal when building this project was to do something that involved interacting with a door from a NFC card, and even better if JSON Web Tokens could be involved with this I figured. Another goal of mine was to achieve all of this with JavaScript as that is my primary language, but also due to the fact that it is less commonly used together with IoT which I saw as a challenge in itself.
+
+The idea of combining software written on the computer with electronics in real life is also something that was incredible to me, and so it has been quite the journey all the way from start to finish with this project.
 
 In the end, the purpose and insights of this project has mainly been educational and for myself to see what code and electronics can achieve together when combined. There is however also a valid use case for this as I definitely can see the need for more smart authentication systems in the near future.
 
