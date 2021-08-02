@@ -1,6 +1,7 @@
 ## Authentication system featuring a prototype door, NFC technology and JSON Web Tokens
 
-#### Erik Claesson - ec222qs
+#### Student Name: Erik Claesson
+#### Student ID: ec222qs
 
 ### Overview
 
