@@ -16,6 +16,8 @@ I will provide a brief overview but without going into too much detail here abou
 3. **Prisma** is a Next-generation Node.js and TypeScript ORM which I use Postgres with. With Prisma, you define your models in the declarative Prisma schema which serves as the single source of truth for your database schema and the models in your programming language of choice.
 4. **Redis** is an in-memory data structure store which I use as a message broker through the publish-subscribe-pattern, as well as caching GraphQL queries with persisted queries, and storing JSON Web Tokens.
 
+![architecture-overview](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627939716/Erik/IoT%20Summer%20Course/IoT_Summer_Project_-_Architecture_nyioht.jpg)
+
 ##### Estimated time: 60+ hours - depends greatly on knowledge and familiarity.
 ##### Estimated price: 3000 SEK
 
