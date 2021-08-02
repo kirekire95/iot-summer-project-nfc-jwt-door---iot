@@ -15,8 +15,8 @@ I will provide a brief overview but without going into too much detail here abou
 3. **Prisma** is a Next-generation Node.js and TypeScript ORM which I use Postgres with. With Prisma, you define your models in the declarative Prisma schema which serves as the single source of truth for your database schema and the models in your programming language of choice.
 4. **Redis** is an in-memory data structure store which I use as a message broker through the publish-subscribe-pattern, as well as caching GraphQL queries with persisted queries, and storing JSON Web Tokens.
 
-Estimated time: 60+ hours - depends greatly on knowledge and familiarity.
-Estimated price: 3000 SEK
+##### Estimated time: 60+ hours - depends greatly on knowledge and familiarity.
+##### Estimated price: 3000 SEK
 
 ### Objective
 
