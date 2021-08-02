@@ -76,8 +76,7 @@ hostname -I
 ```
 Next up, we can open Remote Desktop Connection on our other computer and we should be able to see a screen like this:
 
-![Remote Desktop Image](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627846033/Erik/IoT%20Summer%20Course/Screenshot_847_z3ctdo.png
-)
+![Remote Desktop Image](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627846033/Erik/IoT%20Summer%20Course/Screenshot_847_z3ctdo.png)
 
 After this we will install Node.js on our Raspberry Pi, and we can do that by heading over to the Node.js website and grabbing the latest version for ARMv7. 
 We can use wget to download the file like this:
@@ -140,7 +139,12 @@ At this point, we should be able to read and write with the PN532 NFC device as 
 
 ### Putting everything together
 
-It is my first time having laid my hands on electronics, but I would like to believe that I followed best practices to ensure a more or less production ready setup more so than a development only setup.
+In terms of putting everything together, you may refer to my fritzing schematic below. 
+One key ingredient here for me was reading up on the product documentation for the various devices to better understand how I would wire everything up, and how I could communicate with the devices programatically.
+
+One example is my LCD screen which was a newer version that had some extra features, including support for red, green and blue, while the I2C interface did not. However, once I read through the product documentation for the screen, I got an idea of how I could utilize the I2C interface to still get the colors that I wanted by wiring it up slightly differently and by not letting the I2C dictate the color in which case I would only have had red color.
+
+#### Fritzing Schematic
 
 ![Fritzing Overview](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627859558/Erik/IoT%20Summer%20Course/IoT_Project_bb_ue7doj.png)
 
@@ -293,12 +297,26 @@ I did look into other protocols as well where one intriguing one was MQTT. I cou
 
 ### Presenting the data
 
-Both the Raspberry Pi Node.js server and the Next.js application communicate to each other with every write and read to the NFC card to ensure that the JWT is still saved inside Redis for instance.
+#### Choice of database
+
+I choose to use Postgres as my database of choice, with Prisma as the ORM. I choose this type of database and ORM because I want the data to be structured and because Prisma in particular provides a clean and type-safe API with an enjoyable syntax overall. Using Prisma as an ORM abstracts away the SQL by letting me define my application models as classes, and these classes are mapped to tables in the database. You can then easily read and write data by calling methods on the instances of the model classes. I found this approach made me more productive and a way for me to develop quickly.
+
+#### Microservice communication
+
+In terms of communication between my services, both the Raspberry Pi Node.js server and the Next.js application communicate to each other with every write and read to the NFC card to ensure that the JWT is still saved inside Redis for instance.
 I try to minimize database calls wherever I can and instead utilize Redis whenever possible as Redis as an in-memory data store tends to be quite a bit faster in terms of performance compared to interacting with a regular database.
 
 The unique ID of the NFC card is saved and connected to a user inside my Prisma ORM that uses Postgres under the hood upon every write. However, the JWT that has been written to the NFC card is stored inside Redis only for 5 minutes before expiring, and then one would have to issue and write another JWT onto the NFC card to be able to interact with the door once again.
 
+Below is an attached picture which shows the JWT of the NFC card stored inside of Redis.
+
+![redis-nfc-token](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627923035/Erik/IoT%20Summer%20Course/Screenshot_854_ihbe1n.png)
+
 GraphQL queries, mutations and subscriptions are cached with a SHA-256 hash and are stored inside Redis with something known as persisted queries. Persisted queries are not truly related to the IoT side of things, but it does help with performance and improve network performance, particularly when it comes to larger query strings. Clients can then send the identifier instead of the corresponding query string, thus reducing request sizes dramatically.
+
+Below is an attached picture which shows a saved peristed query inside of Redis.
+
+![persisted-query](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627923296/Erik/IoT%20Summer%20Course/Screenshot_856_sco9dd.png)
 
 ### Conclusion
 
@@ -319,15 +337,11 @@ Below are some pictures of the project in action!
 
 ![card-written](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627922949/Erik/IoT%20Summer%20Course/IMG_20210802_182556_atodry.jpg)
 
-![redis-nfc-token](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627923035/Erik/IoT%20Summer%20Course/Screenshot_854_ihbe1n.png)
-
 ![login](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627923238/Erik/IoT%20Summer%20Course/Screenshot_857_ramfna.png)
 
 ![issue-card](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627923238/Erik/IoT%20Summer%20Course/Screenshot_858_rbcjjn.png)
 
 ![admin-interact-with-door](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627923238/Erik/IoT%20Summer%20Course/Screenshot_859_ielokg.png)
-
-![persisted-query](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627923296/Erik/IoT%20Summer%20Course/Screenshot_856_sco9dd.png)
 
 ![discord-alert](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627922557/Erik/IoT%20Summer%20Course/Screenshot_855_vf7bx9.png)
 
