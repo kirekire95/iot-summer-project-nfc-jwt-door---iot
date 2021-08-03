@@ -193,7 +193,12 @@ We can make use of libraries so that we can communicate with certain hardware an
 
 ### The code
 
-Many dependencies make up this project. But to keep it somewhat simple to understand, I will only be showing and explaining some key snippets from the application.
+Many dependencies make up this project. But to keep it somewhat simple to understand, I will only be showing and explaining some key snippets from the application. 
+
+However, the full projects can be found here:
+
+##### Raspberry Pi IoT Service: https://github.com/kirekire95/iot-raspberry-pi-service
+##### Next.js Application: https://github.com/kirekire95/restaurant-apollo-ts---next.js
 
 As for the code snippet below, I am awaiting the results from a getNFC function which I pass the unique ID of the NFC card to as an argument. This function will send off a GraphQL query to the Next.js application GraphQL Server, and then that will go through a so called resolver which queries the Prisma database for an NFC with the ID inside the argument, which is the ID of the NFC card. If the ID is not there, then it returns null.
 
