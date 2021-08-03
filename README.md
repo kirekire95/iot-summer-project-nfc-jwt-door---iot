@@ -63,6 +63,17 @@ All in all, this is quite a bit of material that I used to create this project a
 
 ### Computer setup
 
+#### Chosen IDE
+
+In terms of an IDE, I use Visual Studio Code, and this has just been released with native support for Raspberry Pi.
+It can easily be installed by running the following command in the terminal
+```
+sudo apt install code
+```
+The code can then be uploaded to Github (or wherever you have your version control).
+
+#### Installation of software and configuration
+
 In order to make efficient use of the Raspberry Pi, I personally like to install RDP (Remote Desktop Protocol). This is because I like to only sit with one computer instead of going back and forth between the two.
 
 In order to make RDP work, we must first make sure that the Raspberry Pi is up to date.
