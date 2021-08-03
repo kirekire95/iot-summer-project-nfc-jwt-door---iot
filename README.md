@@ -321,7 +321,7 @@ Below is an attached picture featuring Prisma Studio, which is a sleek tool to v
 
 ![prisma-studio](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627988917/Erik/IoT%20Summer%20Course/Screenshot_866_qvoz3a.png)
 
-#### Microservice communication
+#### Microservice communication and triggers of the data.
 
 In terms of communication between my services, both the Raspberry Pi Node.js server and the Next.js application communicate to each other with every write and read to the NFC card to ensure that the JWT is still saved inside Redis for instance.
 I try to minimize database calls wherever I can and instead utilize Redis whenever possible as Redis as an in-memory data store tends to be quite a bit faster in terms of performance compared to interacting with a regular database.
