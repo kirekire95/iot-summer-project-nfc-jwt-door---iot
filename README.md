@@ -307,7 +307,7 @@ Furthermore, GraphQL queries, mutations and subscriptions, as well as serverless
 
 One great example of this is where the Raspberry Pi Node.js application will send a POST request to the Next.js API route once the door has been interacted with. This Next.js API route is using a serverless function which is on the backend side of things, and this serverless function will then use the publish-subscribe pattern to publish an event where the door has been interacted with, and then the client will with the help of subscriptions subscribe to this published event which would then render the UI according to the state of this published event. The serverless function also happens to send off a webhook event to Discord, which also would let me know the state of the door and by who it was opened.
 
-Things like device range and battery consumption was of no use to me for this particular project, and so I did not have to think about this aspect.
+Things like device range and battery consumption was of no use to me for this particular project, and so I did not have to think about this aspect, and this is why I went with an ethernet connection as opposed to other power-efficient protocols such as LoRa, SigFox, etc.
 
 I did look into other protocols as well where one intriguing one was MQTT. I could have used the NPM library called graphql-mqtt-subscriptions to handle GraphQL subscriptions. I could use this to also publish and subscribe to certain things - but in the end I did not see a need for my particular use case, and instead I went with a pubsub approach using the NPM library called graphql-redis-subscriptions which instead utilizes Redis; which is yet another production ready library for dealing with GraphQL subscriptions using websockets.
 
