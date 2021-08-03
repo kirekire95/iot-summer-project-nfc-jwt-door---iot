@@ -155,10 +155,12 @@ At this point, we should be able to read and write with the PN532 NFC device as 
 
 ### Putting everything together
 
-In terms of putting everything together, you may refer to my fritzing schematic below. 
-One key ingredient here for me was reading up on the product documentation for the various devices to better understand how I would wire everything up, and how I could communicate with the devices programatically.
+One key ingredient for me to put everything together for me was reading up on the product datasheet and documentation for the various devices to better understand how I would wire everything up. As that would let you know on what kind of resistors to use and what not. There you can also apply Ohm's law to better figure out how voltage, current, and resistance relate when wiring up the hardware.
+Furthermore, reading up on the documentation also lets you know how you can communicate with the devices programatically through your application.
 
 One example is my LCD screen which was a newer version that had some extra features, including support for red, green and blue, while the I2C interface did not. However, once I read through the product documentation for the screen, I got an idea of how I could utilize the I2C interface to still get the colors that I wanted by wiring it up slightly differently and by not letting the I2C dictate the color in which case I would only have had red color.
+
+You may also refer to my fritzing schematic below for more details on how to put everything together. 
 
 #### Fritzing Schematic
 
