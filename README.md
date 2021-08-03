@@ -322,7 +322,7 @@ I did look into other protocols as well where one intriguing one was MQTT. I cou
 
 #### Choice of database
 
-I choose to use a SQL database like Postgres as my database of choice, with Prisma as the ORM. I choose this type of database and ORM because I want the data to be structured and because Prisma in particular provides a clean and type-safe API with an enjoyable syntax overall. Using Prisma as an ORM abstracts away the SQL by letting me define my application models as classes, and these classes are mapped to tables in the database. You can then easily read and write data by calling methods on the instances of the model classes. I found this approach made me more productive and a way for me to develop quickly.
+I choose to use a SQL database like Postgres as my database of choice, with Prisma as the ORM. I choose this type of database and ORM because I want the data to be structured and because Prisma in particular provides a clean and type-safe API with an enjoyable syntax overall. Using Prisma as an ORM abstracts away the SQL by letting me define my application models as classes, and these classes are mapped to tables in the database. One can then easily read and write data by calling methods on the instances of the model classes. I found this approach made me more productive and a way for me to develop quickly.
 
 Below is an attached picture featuring Prisma Studio, which is a sleek tool to visualize the data inside the Postgres database.
 
