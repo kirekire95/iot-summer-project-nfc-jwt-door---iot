@@ -317,6 +317,10 @@ I did look into other protocols as well where one intriguing one was MQTT. I cou
 
 I choose to use Postgres as my database of choice, with Prisma as the ORM. I choose this type of database and ORM because I want the data to be structured and because Prisma in particular provides a clean and type-safe API with an enjoyable syntax overall. Using Prisma as an ORM abstracts away the SQL by letting me define my application models as classes, and these classes are mapped to tables in the database. You can then easily read and write data by calling methods on the instances of the model classes. I found this approach made me more productive and a way for me to develop quickly.
 
+Below is an attached picture featuring Prisma Studio, which is a sleek tool to visualize the data inside the Postgres database.
+
+![prisma-studio](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627988917/Erik/IoT%20Summer%20Course/Screenshot_866_qvoz3a.png)
+
 #### Microservice communication
 
 In terms of communication between my services, both the Raspberry Pi Node.js server and the Next.js application communicate to each other with every write and read to the NFC card to ensure that the JWT is still saved inside Redis for instance.
