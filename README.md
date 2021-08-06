@@ -347,6 +347,18 @@ Below is an attached picture which shows a saved peristed query inside of Redis.
 
 ![persisted-query](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627923296/Erik/IoT%20Summer%20Course/Screenshot_856_sco9dd.png)
 
+### Flowcharts
+
+Below are two flowcharts which demonstrates the use of the application.
+
+#### Flowchart to issue a card
+
+![issue-card](https://res.cloudinary.com/cubbans-cloud/image/upload/v1628255719/Erik/IoT%20Summer%20Course/issuecard_srbakd.jpg)
+
+#### Flowchart to read the card
+
+![read-card](https://res.cloudinary.com/cubbans-cloud/image/upload/v1628255718/Erik/IoT%20Summer%20Course/opendoor_kd8mpm.jpg)
+
 ### Conclusion
 
 I achieved everything I could possibly want for this project, and I am very much content with the results.
