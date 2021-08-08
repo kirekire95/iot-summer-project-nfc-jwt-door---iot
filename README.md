@@ -330,6 +330,12 @@ Below is an attached picture featuring Prisma Studio, which is a sleek tool to v
 
 ![prisma-studio](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627988917/Erik/IoT%20Summer%20Course/Screenshot_866_qvoz3a.png)
 
+#### Graphana Dashboard Visualization
+
+Below is an attached picture featuring Grafana and the Infinity Plugin, which lets me query my GraphQL API. In this case I use it to see when the door has been interacted with, by what user, and how many times the door has been interacted with, etc.
+
+![grafana-infinity](https://res.cloudinary.com/cubbans-cloud/image/upload/v1628423330/Erik/IoT%20Summer%20Course/Screenshot_1012_sursps.png)
+
 #### Microservice communication and triggers of the data.
 
 In terms of communication between my services, both the Raspberry Pi Node.js server and the Next.js application communicate to each other with every write and read to the NFC card to ensure that the JWT is still saved inside Redis for instance.
@@ -362,7 +368,7 @@ Below are two flowcharts which demonstrates the use of the application.
 ### Conclusion
 
 I achieved everything I could possibly want for this project, and I am very much content with the results.
-Further down the line I plan on adding on further datasources to my GraphQL gateway, where I can leverage the IoT related hardware for other projects as well. In that sense it feels great to have all the infrastructure already in place with a solid architecture that allows you to easily add on more datasources to the GraphQL gateway and what not.
+Further down the line I plan on adding on more monitoring, as well as additional datasources to my GraphQL gateway, where I can leverage the IoT related hardware for other projects as well. In that sense it feels great to have all the infrastructure already in place with a solid architecture that allows you to easily add on more datasources to the GraphQL gateway and what not.
 
 Below are some pictures of the project in action!
 
