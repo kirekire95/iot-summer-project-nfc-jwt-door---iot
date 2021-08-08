@@ -334,7 +334,7 @@ Below is an attached picture featuring Prisma Studio, which is a sleek tool to v
 
 Below is an attached picture featuring Grafana and the Infinity Plugin, which lets me query my GraphQL API. In this case I use it to see when the door has been interacted with, by what user, and how many times the door has been interacted with, etc.
 
-![grafana-infinity](https://res.cloudinary.com/cubbans-cloud/image/upload/v1628423330/Erik/IoT%20Summer%20Course/Screenshot_1012_sursps.png)
+![grafana-infinity](https://res.cloudinary.com/cubbans-cloud/image/upload/v1628424004/Erik/IoT%20Summer%20Course/Screenshot_1013_s8e2v8.png)
 
 #### Microservice communication and triggers of the data.
 
