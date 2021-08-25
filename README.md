@@ -19,7 +19,7 @@ I will provide a brief overview but without going into too much detail here abou
 ![architecture-overview](https://res.cloudinary.com/cubbans-cloud/image/upload/v1627939716/Erik/IoT%20Summer%20Course/IoT_Summer_Project_-_Architecture_nyioht.jpg)
 
 ##### Estimated time: 60+ hours - depends greatly on knowledge and familiarity.
-##### Estimated price: 3000 SEK
+##### Estimated price: 3000 SEK (~300 $)
 
 ### Objective
 
