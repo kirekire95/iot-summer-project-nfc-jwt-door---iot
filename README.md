@@ -3,6 +3,8 @@
 #### Student Name: Erik Claesson
 #### Student ID: ec222qs
 
+PS. The video can be found here: https://www.youtube.com/watch?v=vhtfAUXgSus
+
 ### Overview
 
 In this project I will go through how I built my own authentication system featuring a door that can be opened with an NFC card along with the help of a JSON Web Token (JWT) stored onto it for extra security.
@@ -397,5 +399,3 @@ Below are some pictures of the project in action!
 Lastly I would like to just mention that a single Node.js API for the Raspberry Pi is more than likely all you would need to get going with this type of project.
 In fact, initially I let the Raspberry Pi Node.js API handle everything from the IoT side of things to authentication and to creating users with a MongoDB database. Later on however, I thought it would be a better idea to turn this into a microservice architecture to adhere to greater separation of concerns and for greater scalability in the future.
 By going this route, the Raspberry Pi Node.js API would then only handle things related to the IoT and electronic side of things, such as reading and writing to the NFC card, turning on and off lights, and unlocking the door. In other words, it would no longer have to deal with things such as authentication or having its own database and so on. Instead, this is why I decided to create a separate Next.js application that also uses GraphQL which then adds on the RESTful Raspberry Pi API as a datasource on top of the GraphQL layer, so that this application can deal with authentication and distributing JSON Web Keys for other microservices to consume and what not.
-
-PS. The video can be found here: https://www.youtube.com/watch?v=vhtfAUXgSus
